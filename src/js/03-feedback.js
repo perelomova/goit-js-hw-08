@@ -28,19 +28,29 @@ function saveDataToLocalStorage(data) {
 
 function handleSubmit(event) {
   event.preventDefault();
-
-  console.log(localStorageSavedData);
-
+  if (refs.input.value === "" || refs.textarea.value === "") {
+    console.log("Please fill in all fields!")
+  } else {
+  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+  }
+ 
   event.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 };
 
 function populateFormWithData() {
-  if (localStorageSavedData) {
-    refs.input.value = localStorageSavedData.email;
-    refs.textarea.value = localStorageSavedData.message;
-  }
-}
 
+  if (localStorageSavedData) {
+    if (localStorageSavedData.email) {
+      refs.input.value = localStorageSavedData.email;
+    } 
+
+    if (localStorageSavedData.message) {
+      refs.textarea.value = localStorageSavedData.message;
+    }
+  } 
+
+}
+ 
 
 
